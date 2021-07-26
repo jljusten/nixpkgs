@@ -18042,6 +18042,7 @@ with pkgs;
   ogre1_10 = callPackage ../development/libraries/ogre/1.10.x.nix {};
 
   ogrepaged = callPackage ../development/libraries/ogrepaged { };
+  ogre-caelum = callPackage ../development/libraries/ogre-caelum { };
 
   olm = callPackage ../development/libraries/olm { };
 
