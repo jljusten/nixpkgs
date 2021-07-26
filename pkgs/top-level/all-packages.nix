@@ -18042,7 +18042,6 @@ with pkgs;
   ogre1_10 = callPackage ../development/libraries/ogre/1.10.x.nix {};
   ogre1_11 = callPackage ../development/libraries/ogre/1.11.x.nix {};
 
-  ogrepaged = callPackage ../development/libraries/ogrepaged { };
   ogre-caelum = callPackage ../development/libraries/ogre-caelum { };
 
   olm = callPackage ../development/libraries/olm { };
@@ -29800,13 +29799,13 @@ with pkgs;
   rftg = callPackage ../games/rftg { };
 
   rigsofrods = callPackage ../games/rigsofrods {
-    angelscript = angelscript_2_22;
-    ogre = ogre1_9;
-    ogrepaged = ogrepaged.override {
-      ogre = ogre1_9;
+    ogre = ogre1_11;
+    ogre-caelum = ogre-caelum.override {
+      ogre = ogre1_11;
     };
     mygui = mygui.override {
       withOgre = true;
+      ogre = ogre1_11;
     };
   };
 
