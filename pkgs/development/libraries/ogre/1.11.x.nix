@@ -6,7 +6,8 @@
 , libXxf86vm, libICE
 , libXrender
 , withNvidiaCg ? false, nvidia_cg_toolkit
-, withSamples ? false }:
+, withSamples ? false
+}:
 
 stdenv.mkDerivation rec {
   pname = "ogre";
@@ -26,20 +27,20 @@ stdenv.mkDerivation rec {
 
 
   nativeBuildInputs = [ cmake pkg-config ];
-  buildInputs =
-   [ libGLU libGL
-     freetype freeimage zziplib xorgproto libXrandr
-     libXaw freeglut libXt libpng boost ois
-     libX11 libXmu libSM
-     libXxf86vm libICE
-     libXrender
-   ] ++ lib.optional withNvidiaCg nvidia_cg_toolkit;
+  buildInputs = [
+    libGLU libGL
+    freetype freeimage zziplib xorgproto libXrandr
+    libXaw freeglut libXt libpng boost ois
+    libX11 libXmu libSM
+    libXxf86vm libICE
+    libXrender
+  ] ++ lib.optional withNvidiaCg nvidia_cg_toolkit;
 
-  meta = {
+  meta = with lib; {
     description = "A 3D engine";
     homepage = "https://www.ogre3d.org/";
-    maintainers = [ lib.maintainers.raskin ];
-    platforms = lib.platforms.linux;
-    license = lib.licenses.mit;
+    maintainers = [ maintainers.raskin ];
+    platforms = platforms.linux;
+    license = licenses.mit;
   };
 }
