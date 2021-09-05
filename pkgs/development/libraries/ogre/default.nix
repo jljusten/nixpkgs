@@ -38,8 +38,7 @@ in stdenv.mkDerivation rec {
     chmod u+w -R build
   '';
 
-  cmakeFlags = [ "-DOGRE_BUILD_DEPENDENCIES=OFF" "-DOGRE_BUILD_SAMPLES=${toString withSamples}"
-                  ]
+  cmakeFlags = [ "-DOGRE_BUILD_DEPENDENCIES=OFF" "-DOGRE_BUILD_SAMPLES=${toString withSamples}" ]
     ++ map (x: "-DOGRE_BUILD_PLUGIN_${x}=on")
            ([ "BSP" "OCTREE" "PCZ" "PFX" ] ++ lib.optional withNvidiaCg "CG")
     ++ map (x: "-DOGRE_BUILD_RENDERSYSTEM_${x}=on") [ "GL" ];
@@ -57,11 +56,11 @@ in stdenv.mkDerivation rec {
      pugixml
    ] ++ lib.optional withNvidiaCg nvidia_cg_toolkit;
 
-  meta = {
+  meta = with lib; {
     description = "A 3D engine";
     homepage = "https://www.ogre3d.org/";
-    maintainers = [ lib.maintainers.raskin lib.maintainers.luc65r ];
-    platforms = lib.platforms.linux;
-    license = lib.licenses.mit;
+    maintainers = with maintainers; [ raskin luc65r ];
+    platforms = platforms.linux;
+    license = licenses.mit;
   };
 }
