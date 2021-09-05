@@ -7,8 +7,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "RigsOfRods";
     repo = "socketw";
-    rev = "f2094522b3940fd361ed9799bd0fcf4ba2b84988";
-    sha256 = "8fURQdKr7uVDykDILlxKTxi7DXPqo5UdpOLlhwbWl2w=";
+    rev = "refs/tags/${version}";
+    hash = "sha256-fqPo7X9gYkIcMFhJLR+OrTpJM27lCMynbXsPcFc/Huw=";
   };
 
   nativeBuildInputs = [ cmake ];
