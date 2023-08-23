@@ -12,7 +12,12 @@ stdenv.mkDerivation {
     sha256 = "0bs2b90wjkk1camcasy8kn403kazq6c7fj5m5msfl3navbgwz9i6";
   };
 
-  buildInputs = with perlPackages; [ perl IOStringy TestOutput ];
+  depsBuildTarget = with perlPackages; [ perl IOStringy TestOutput ];
+
+  postFixup = ''
+    # Set perl to host perl for cross compiling
+    HOST_PATH=${perlPackages.perl}/bin patchShebangs --host --update "$out/bin/"
+  '';
 
   doCheck = true;
 
