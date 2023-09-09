@@ -1,4 +1,4 @@
-{lib, stdenv, fetchurl}:
+{lib, stdenv, cmake, ninja, fetchurl}:
 
 stdenv.mkDerivation rec {
   pname = "cpputest";
@@ -8,6 +8,15 @@ stdenv.mkDerivation rec {
     url = "https://github.com/cpputest/cpputest/releases/download/v${version}/${pname}-${version}.tar.gz";
     sha256 = "1xslavlb1974y5xvs8n1j9zkk05dlw8imy4saasrjlmibl895ii1";
   };
+
+  nativeBuildInputs = [ cmake ninja ];
+
+  preConfigure = ''
+    cmakeFlagsArray+=(
+      "-DCMAKE_INSTALL_INCLUDEDIR=include"
+      "-DCMAKE_INSTALL_LIBDIR=lib"
+    )
+  '';
 
   meta = with lib; {
     homepage = "https://cpputest.github.io/";
