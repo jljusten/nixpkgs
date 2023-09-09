@@ -65,11 +65,12 @@ let
         ++ map (p: "-D${p.cmakeFlag}=" + (if p.enabled then "ON" else "OFF")) plugins
         ;
 
-      nativeBuildInputs = [ cmake pkg-config asciidoctor ] ++ lib.optional enableTests cpputest;
+      nativeBuildInputs = [ cmake pkg-config asciidoctor ];
       buildInputs = with lib; [
           ncurses openssl aspell gnutls gettext zlib curl
           libgcrypt ]
         ++ optionals stdenv.isDarwin [ libobjc libresolv ]
+        ++ optional enableTests cpputest
         ++ concatMap (p: p.buildInputs) enabledPlugins
         ++ extraBuildInputs;
 
