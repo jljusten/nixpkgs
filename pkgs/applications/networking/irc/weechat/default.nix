@@ -1,7 +1,7 @@
 { stdenv, fetchurl, fetchpatch, lib
 , ncurses, openssl, aspell, gnutls, gettext
 , zlib, curl, pkg-config, libgcrypt
-, cmake, libobjc, libresolv, libiconv
+, cmake, ninja, libobjc, libresolv, libiconv
 , asciidoctor # manpages
 , enableTests ? !stdenv.isDarwin, cpputest
 , guileSupport ? true, guile
@@ -65,7 +65,7 @@ let
         ++ map (p: "-D${p.cmakeFlag}=" + (if p.enabled then "ON" else "OFF")) plugins
         ;
 
-      nativeBuildInputs = [ cmake pkg-config asciidoctor ];
+      nativeBuildInputs = [ cmake ninja pkg-config asciidoctor ];
       buildInputs = with lib; [
           ncurses openssl aspell gnutls gettext zlib curl
           libgcrypt ]
